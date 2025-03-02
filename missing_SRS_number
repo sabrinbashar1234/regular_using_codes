@@ -1,0 +1,62 @@
+##to find out missing SRS number from original SRS file, I deleted the SRS number which are already existed. Here is the code:
+# Load required libraries
+library(readxl)
+library(readr)
+library(dplyr)
+
+# Read the CSV file
+all_srs_graham <- read_csv("C:/Users/Sabrin/Downloads/all_SRS_graham.csv", col_names = FALSE)
+colnames(all_srs_graham) <- "secondary_sample_accession"
+
+# Read the Excel file
+srs_xlsx <- read_excel("C:/Users/Sabrin/Downloads/SRS.xlsx")
+
+# Remove SRS* numbers present in all_SRS_graham.csv from SRS.xlsx
+missing_srs <- srs_xlsx %>%
+  filter(!secondary_sample_accession %in% all_srs_graham$secondary_sample_accession)
+
+# Count the number of missing SRS* numbers
+missing_count <- nrow(missing_srs)
+
+# Print the result
+cat("Number of missing SRS* numbers:", missing_count, "\n")
+
+# Optionally, save the missing SRS* numbers to a new CSV file
+write_csv(missing_srs, "C:/Users/Sabrin/Downloads/missing_SRS.csv")
+
+##to find out whether there is any duplicate number of SRS in the missing_SRS.csv file, here is the code:
+# Read the CSV file
+missing_srs <- read.csv("C:/Users/Sabrin/Downloads/missing_SRS.csv")
+
+# Check if the file was read correctly
+if (nrow(missing_srs) == 0) {
+  cat("The CSV file is empty or couldn't be read properly.\n")
+} else {
+  cat("File read successfully. Number of rows:", nrow(missing_srs), "\n")
+  cat("Columns in the file:", paste(colnames(missing_srs), collapse=", "), "\n")
+  
+  # Check if the column exists
+  if (!"secondary_sample_accession" %in% colnames(missing_srs)) {
+    cat("The column 'secondary_sample_accession' does not exist in the CSV file.\n")
+  } else {
+    cat("'secondary_sample_accession' column found.\n")
+    
+    # Check for duplicates in the SRS column
+    duplicates <- missing_srs[duplicated(missing_srs$secondary_sample_accession) | duplicated(missing_srs$secondary_sample_accession, fromLast = TRUE), ]
+    
+    cat("Duplicates data frame created. Number of rows:", nrow(duplicates), "\n")
+    
+    # Count the number of duplicates
+    num_duplicates <- nrow(duplicates)
+    
+    cat("Number of duplicates:", num_duplicates, "\n")
+    
+    # Print the result
+    if (length(num_duplicates) > 0 && num_duplicates > 0) {
+      cat("There are", num_duplicates, "duplicate SRS* numbers in missing_SRS.csv\n")
+      print(head(duplicates))
+    } else {
+      cat("There are no duplicate SRS* numbers in missing_SRS.csv\n")
+    }
+  }
+}
