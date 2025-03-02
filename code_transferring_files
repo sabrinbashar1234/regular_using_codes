@@ -1,4 +1,4 @@
 ##Ubuntu
-##tranferring files from Graham to my computer (need to log out from cloud; also need Duo for permission):
+##tranferring files from Graham to my computer (need to log out from cloud; also need Duo for permission; change account_name):
 
 sabrin@SabrinBashar:~$ scp account_name@graham.alliancecan.ca:/home/acount_name/scratch/missing_srs.txt /mnt/c/Users/Sabrin/Downloads/
