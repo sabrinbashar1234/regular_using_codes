@@ -1,0 +1,7 @@
+##srs.txt has the list of SRS* folder which has missing fastq files. I am removing the folder from scratch according to list:
+
+#Run the command with echo first to preview the folders that will be deleted; check with the list:
+xargs -a /scratch/sbashar/missing_srs.txt echo rm -rf
+
+#To remove the 144 SRS folders listed in missing_srs.txt from scratch directory, use the following command:
+xargs -a /scratch/sbashar/missing_srs.txt rm -rf
