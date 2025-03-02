@@ -1,3 +1,4 @@
+##Ubuntu
 ##tranferring files from Graham to my computer (need to log out from cloud; also need Duo for permission):
 
 sabrin@SabrinBashar:~$ scp sbashar@graham.alliancecan.ca:/home/sbashar/scratch/missing_srs.txt /mnt/c/Users/Sabrin/Downloads/
