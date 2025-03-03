@@ -1,6 +1,7 @@
 ##after removing missing SRS from scratch, check the remaining SRS* folder and listing them in srs_folders.csv:
 
- find /scratch/sbashar -maxdepth 1 -type d -name "SRS*" | sed 's/.*\///' > srs_folders.csv
+find /scratch/sbashar -maxdepth 1 -type d -name "SRS*" | wc -l ##to find the number of SRS* folder
+find /scratch/sbashar -maxdepth 1 -type d -name "SRS*" | sed 's/.*\///' > srs_folders.csv
    #check the format of the file:
    cat srs_folders.csv | head
 
