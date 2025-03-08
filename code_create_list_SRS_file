@@ -12,3 +12,8 @@ find /scratch/sbashar -maxdepth 1 -type d -name "SRS*" | sed 's/.*\///' > srs_fo
 ##checking the number of fastq files in current directory:
 find . -name "*_1.paired.bbdukclean.fq.gz" | wc -l
 find . -name "*_2.paired.bbdukclean.fq.gz" | wc -l
+
+##remove SRR folder of SRR_bbduk_list.csv from the all_SRS_SRR.csv file and create new list without bbduk list
+#filtered_all_SRS_SRR.csv 
+
+awk -F',' 'NR==FNR {exclude[$1]; next} !($1 in exclude)' SRR_bbduk_list.csv all_SRS_SRR.csv > filtered_all_SRS_SRR.csv
