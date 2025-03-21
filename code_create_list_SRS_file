@@ -18,6 +18,9 @@ find . -name "*_2.paired.bbdukclean.fq.gz" | wc -l
 ##To know which folder missing 'contigs.fasta' file" in current directory:
 comm -23 <(ls | sort) <(find . -name "contigs.fasta" -printf "%h\n" | xargs -I {} basename {} | sort)
 
+##remove SRR* folder according to the list of .txt file:
+xargs -d '\n' rm -r < missing_folders_spades_122.txt
+
 ##remove SRR folder of SRR_bbduk_list.csv from the all_SRS_SRR.csv file and create new list without bbduk list
 #filtered_all_SRS_SRR.csv 
 
